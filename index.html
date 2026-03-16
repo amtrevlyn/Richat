@@ -1,11 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-	<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Sanctuary">
-
-<link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/2589/2589175.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Our Sanctuary | Space 🌸</title>
@@ -23,37 +18,6 @@
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
     
     <style>
-	/* Tambahkan di dalam <style> */
-html, body {
-    position: fixed;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    /* Mencegah seleksi teks agar terasa seperti app asli */
-    -webkit-user-select: none; 
-    user-select: none;
-}
-
-.container {
-    height: 100%;
-    overflow-y: auto;
-    /* Scroll halus khas iOS */
-    -webkit-overflow-scrolling: touch; 
-}
-
-/* Biarkan input tetap bisa diketik */
-input, textarea {
-    -webkit-user-select: text;
-    user-select: text;
-}
-	.ping-animation {
-    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    pointer-events: none; z-index: 10001; animation: ping 2s ease-out forwards;
-}
-@keyframes ping {
-    0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
-    100% { transform: translate(-50%, -50%) scale(4); opacity: 0; }
-}
         :root { --pink: #ff85a2; --soft-pink: #ffdae0; --matcha: #aed581; --deep-pink: #ef476f; --online: #2ecc71; --glass: rgba(255, 255, 255, 0.8); }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #fff0f3; margin: 0; padding: 0; display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; touch-action: manipulation; }
         .container { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(15px); padding: 20px; width: 100%; max-width: 400px; min-height: 100vh; position: relative; padding-bottom: 90px; box-sizing: border-box; display: none; }
@@ -87,29 +51,6 @@ input, textarea {
             outline: none; box-sizing: border-box; transition: 0.3s;
         }
         .input-luxury:focus { background: #fff; transform: scale(1.02); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-	.voucher-card {
-    min-width: 130px;
-    background: linear-gradient(135deg, #ff85a2, #ef476f);
-    padding: 15px;
-    border-radius: 20px;
-    color: white;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(239, 71, 111, 0.3);
-    cursor: pointer;
-    transition: 0.3s;
-}
-.voucher-card:active { transform: scale(0.9); }
-.voucher-card b { display: block; font-size: 0.8rem; margin-bottom: 5px; }
-.voucher-card span { font-size: 0.6rem; opacity: 0.9; background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 10px; }
-
-.journal-item {
-    background: #fffcfd;
-    padding: 10px;
-    border-radius: 12px;
-    margin-bottom: 8px;
-    border-left: 3px solid var(--pink);
-    font-size: 0.75rem;
-}
 
         .btn-unlock {
             background: var(--deep-pink); color: white; border: none; width: 100%; padding: 15px;
@@ -211,11 +152,6 @@ input, textarea {
         </div>
 
         <div class="mood-container">
-	<div style="margin-top: 15px; border-top: 1px solid #eee; padding-top: 10px;">
-    <input type="text" id="status-input" maxlength="30" placeholder="Lagi apa sayang? (maks 30 huruf)" 
-           style="width: 80%; padding: 8px; border-radius: 12px; border: 1px solid #eee; font-size: 0.7rem;">
-    <button onclick="updateStatusText()" style="background: var(--pink); border: none; border-radius: 50%; width: 30px; height: 30px; color: white;">✓</button>
-</div>
             <span style="font-size: 0.75rem; font-weight: bold; color: var(--pink);">Gimana perasaanmu sekarang?</span>
             <div class="mood-options">
                 <span class="mood-emoji" onclick="updateMood('😊')">😊</span>
@@ -318,84 +254,8 @@ input, textarea {
         <div class="nav-item" onclick="showSection('sec-love', this)">✨<span class="nav-label">Love</span></div>
     </div>
 </div>
-	<div class="nav-item" onclick="showSection('sec-vault', this)">🎁<span class="nav-label">Vault</span></div>
 
-<div id="sec-vault" class="section" style="display:none;">
-    <h3 style="text-align:center; color:var(--deep-pink)">🎁 Virtual Love Box</h3>
-    
-    <div style="margin-bottom: 20px;">
-        <p style="font-size: 0.8rem; font-weight: bold; color: var(--pink);">🎟️ Voucher Khusus Rini:</p>
-        <div style="display: flex; gap: 10px; overflow-x: auto; padding-bottom: 10px;">
-            <div class="voucher-card" onclick="claimVoucher('Mau Dimanja 🥺')">
-                <b>Mau Dimanja</b>
-                <span>Klaim Sekarang</span>
-            </div>
-            <div class="voucher-card" onclick="claimVoucher('Keju & Matcha 🍵')">
-                <b>Keju + Matcha</b>
-                <span>Kirim Kode Jajan</span>
-            </div>
-            <div class="voucher-card" onclick="claimVoucher('Pelukan Online 🫂')">
-                <b>Peluk Erat</b>
-                <span>Klaim 1x</span>
-            </div>
-        </div>
-    </div>
-
-    <div class="health-card">
-        <div style="font-weight:bold; color:var(--deep-pink); font-size:0.9rem; margin-bottom:10px;">📖 Love Journal</div>
-        <textarea id="journal-input" placeholder="Apa yang bikin kamu senang hari ini?" style="width:100%; border-radius:15px; border:1px solid #eee; padding:10px; font-family:inherit; resize:none;"></textarea>
-        <button class="btn" style="background:var(--matcha); width:100%; margin-top:5px;" onclick="saveJournal()">Simpan Kenangan</button>
-        <div id="journal-list" style="margin-top:15px; max-height: 200px; overflow-y: auto;"></div>
-    </div>
-</div>
 <script>
-// Tambahkan fungsi getar di dalam <script>
-function hapticFeedback() {
-    if (window.navigator && window.navigator.vibrate) {
-        window.navigator.vibrate([10]); // Getaran sangat singkat khas iPhone
-    }
-}
-
-// Panggil fungsi ini di tombol-tombol penting, contoh:
-function claimVoucher(nama) {
-    hapticFeedback();
-    if(confirm(`Klaim voucher "${nama}" sekarang?`)) {
-        // ... kode lama ...
-    }
-}
-function claimVoucher(Rini) {
-    if(confirm(`Klaim voucher "${Rini}" sekarang?`)) {
-        sendLoveAction(`Mengklaim Voucher: ${Rini} 🎟️`);
-        alert("Voucher berhasil diklaim! Wahyu akan segera meluncur! ❤️");
-    }
-}
-
-function saveJournal() {
-    const text = document.getElementById('journal-input').value;
-    if(!text.trim()) return;
-    database.ref('journal').push().set({
-        sender: window.userRole,
-        text: text,
-        timestamp: Date.now(),
-        date: new Date().toLocaleDateString('id-ID', { day:'numeric', month:'short' })
-    });
-    document.getElementById('journal-input').value = "";
-}
-
-// Tambahkan pemanggilan ini di dalam function checkPass() kamu nanti
-function listenJournal() {
-    database.ref('journal').on('value', snap => {
-        const list = document.getElementById('journal-list');
-        list.innerHTML = "";
-        snap.forEach(c => {
-            const d = c.val();
-            const div = document.createElement('div');
-            div.className = 'journal-item';
-            div.innerHTML = `<small style="color:var(--pink)">${d.date} - ${d.sender}</small><br>${d.text}`;
-            list.prepend(div);
-        });
-    });
-}
     // --- FIREBASE CONFIG ---
     const firebaseConfig = { 
         apiKey: "AIzaSyCTR3QhEHG4lgU_1N4RWNDIZ_GCb5FUw_Q", 
@@ -411,60 +271,7 @@ function listenJournal() {
 
     // --- AUTH & NAV ---
     function checkPass() {
-        // 1. Tambahkan panggil listenJournal() & listenStatus() di dalam checkPass()
-function checkPass() {
-    // ... kode lama kamu ...
-    if(document.getElementById('pass-input').value === "14022026") {
-        // ... kode lama ...
-        listenJournal(); // Panggil fungsi journal
-        listenStatus();  // Fungsi status baru
-        notifyEntry();   // Beritahu pasangan kalau kita buka aplikasi
-        listenEntry();   // Dengerin kalau pasangan buka aplikasi
-    }
-}
-
-// 2. Fungsi Update Status Teks
-function updateStatusText() {
-    const txt = document.getElementById('status-input').value;
-    if(!txt) return;
-    database.ref('status_text/' + window.userRole).set(txt);
-    document.getElementById('status-input').value = "";
-}
-
-function listenStatus() {
-    database.ref('status_text/Wahyu').on('value', s => {
-        const el = document.querySelector('#clock-wahyu');
-        if(el) el.innerHTML = `<b>${new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'})}</b><br><i style="font-size:0.55rem; color:var(--pink)">"${s.val() || 'Online'}"</i>`;
-    });
-    database.ref('status_text/RINI').on('value', s => {
-        const el = document.querySelector('#clock-rini');
-        if(el) el.innerHTML = `<b>${new Date().toLocaleTimeString('id-ID', {hour:'2-digit', minute:'2-digit'})}</b><br><i style="font-size:0.55rem; color:var(--pink)">"${s.val() || 'Online'}"</i>`;
-    });
-}
-
-// 3. Efek Real-time saat Pasangan Masuk Aplikasi
-function notifyEntry() {
-    database.ref('entry_ping/' + window.userRole).set(Date.now());
-}
-
-function listenEntry() {
-    const otherUser = window.userRole === "Wahyu" ? "RINI" : "Wahyu";
-    database.ref('entry_ping/' + otherUser).on('value', snap => {
-        if(!snap.val()) return;
-        // Hanya munculkan efek jika pings-nya baru (dalam 5 detik terakhir)
-        if(Date.now() - snap.val() < 5000) {
-            const effect = document.createElement('div');
-            effect.className = 'ping-animation';
-            effect.innerHTML = '✨❤️✨';
-            document.body.appendChild(effect);
-            setTimeout(() => effect.remove(), 2000);
-            
-            // Suara notif kecil jika ingin (opsional)
-            // if(!document.getElementById('mySong').paused) createSparkle();
-        }
-    });
-}
-	if(document.getElementById('pass-input').value === "14022026") {
+        if(document.getElementById('pass-input').value === "14022026") {
             window.userRole = document.getElementById('login-name').value;
             const ls = document.getElementById('lock-screen');
             ls.style.transition = "1s";
@@ -587,10 +394,6 @@ function listenEntry() {
             div.setAttribute('data-id', d.timestamp);
             if(d.type === 'system') {
                 div.innerText = d.text;
-	box.scrollTo({
-    	top: box.scrollHeight,
-    	behavior: 'smooth'
-	});
             } else {
                 let h = `<div style="font-size:0.55rem; opacity:0.7; margin-bottom:2px;"><b>${d.sender}</b></div>`;
                 if(d.replyTo) {
