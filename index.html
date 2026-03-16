@@ -69,7 +69,7 @@
         #chat-box { height: 300px; overflow-y: auto; padding: 10px; border-radius: 20px; background: #fffcfd; display: flex; flex-direction: column; gap: 10px; border: 1px solid #f0f0f0; scroll-behavior: smooth; }
         .msg { padding: 10px 15px; border-radius: 18px; font-size: 0.85rem; max-width: 85%; position: relative; transition: 0.2s; border: 2px solid transparent; }
         .wahyu { align-self: flex-start; background: #ffeaef; color: #7a3e4d; border-bottom-left-radius: 2px; }
-        .rini { align-self: flex-end; background: #f0f9f1; color: #3e5d40; border-bottom-right-radius: 2px; }
+        .Rini { align-self: flex-end; background: #f0f9f1; color: #3e5d40; border-bottom-right-radius: 2px; }
         .system { align-self: center; background: #fff2f5; color: var(--deep-pink); font-size: 0.7rem; border: 1px dashed var(--pink); width: 90%; text-align: center; border-radius: 10px; }
         .reply-box { font-size: 0.7rem; background: rgba(0,0,0,0.05); padding: 5px; border-radius: 10px; margin-bottom: 5px; border-left: 3px solid var(--pink); cursor: pointer; }
         .online-dot { height: 8px; width: 8px; background-color: #bbb; border-radius: 50%; display: inline-block; margin-right: 5px; transition: 0.3s; }
@@ -119,7 +119,7 @@
         
         <select id="login-name" class="input-luxury">
             <option value="Wahyu">Wahyu</option>
-            <option value="RINI">RINI</option>
+            <option value="Rini">Rini</option>
         </select>
         
         <input type="password" id="pass-input" class="input-luxury" placeholder="Anniversary Code" inputmode="numeric">
@@ -145,8 +145,8 @@
                     <b id="clock-wahyu">00:00</b><br><small>Morowali Utara</small>
                 </div>
                 <div>
-                    <span class="online-dot" id="dot-rini"></span> RINI <span id="mood-rini" class="user-mood-display">...</span>
-                    <b id="clock-rini">00:00</b><br><small>Berau</small>
+                    <span class="online-dot" id="dot-Rini"></span> Rini <span id="mood-Rini" class="user-mood-display">...</span>
+                    <b id="clock-Rini">00:00</b><br><small>Berau</small>
                 </div>
             </div>
         </div>
@@ -227,14 +227,14 @@
                     <span class="stat-value" id="val-w-wahyu">-</span>
                 </div>
                 <div class="stat-box">
-                    <span class="stat-label">RINI</span>
-                    <span class="stat-value" id="val-w-rini">-</span>
+                    <span class="stat-label">Rini</span>
+                    <span class="stat-value" id="val-w-Rini">-</span>
                 </div>
             </div>
         </div>
 
         <div class="health-card">
-            <div style="font-weight:bold; color:var(--deep-pink); font-size:0.9rem; margin-bottom:10px;">📅 Period Tracker (RINI)</div>
+            <div style="font-weight:bold; color:var(--deep-pink); font-size:0.9rem; margin-bottom:10px;">📅 Period Tracker (Rini)</div>
             <div style="display:flex; flex-direction:column; gap:8px;">
                 <input type="date" id="period-date" style="padding:8px; border-radius:10px; border:1px solid #eee; font-family:inherit;">
                 <button class="btn" style="background:var(--pink);" onclick="savePeriod()">Catat Hari Pertama</button>
@@ -336,7 +336,7 @@
 
     function listenHealth() {
         database.ref('health/weight/Wahyu').on('value', s => { if(document.getElementById('val-w-wahyu')) document.getElementById('val-w-wahyu').innerText = s.val() ? s.val() + 'kg' : '-'; });
-        database.ref('health/weight/RINI').on('value', s => { if(document.getElementById('val-w-rini')) document.getElementById('val-w-rini').innerText = s.val() ? s.val() + 'kg' : '-'; });
+        database.ref('health/weight/Rini').on('value', s => { if(document.getElementById('val-w-Rini')) document.getElementById('val-w-Rini').innerText = s.val() ? s.val() + 'kg' : '-'; });
         database.ref('health/period').on('value', s => {
             if(s.val()) {
                 const date = new Date(s.val());
@@ -362,7 +362,7 @@
         });
         database.ref('typing').on('value', snap => {
             const data = snap.val();
-            const otherUser = window.userRole === "Wahyu" ? "RINI" : "Wahyu";
+            const otherUser = window.userRole === "Wahyu" ? "Rini" : "Wahyu";
             const dot = document.getElementById(`dot-${otherUser.toLowerCase()}`);
             if(data && data[otherUser] && dot) {
                 dot.style.boxShadow = "0 0 15px var(--online)";
@@ -453,7 +453,7 @@
 
     function listenMoods() {
         database.ref('moods/Wahyu').on('value', s => { if(document.getElementById('mood-wahyu')) document.getElementById('mood-wahyu').innerText = s.val() || '😊'; });
-        database.ref('moods/RINI').on('value', s => { if(document.getElementById('mood-rini')) document.getElementById('mood-rini').innerText = s.val() || '😊'; });
+        database.ref('moods/Rini').on('value', s => { if(document.getElementById('mood-Rini')) document.getElementById('mood-Rini').innerText = s.val() || '😊'; });
     }
 
     const myWidget = cloudinary.createUploadWidget({ cloudName: "deuuml0fs", uploadPreset: "yurin_preset" }, (err, res) => {
@@ -490,7 +490,7 @@
     function toggleMusic() { const s = document.getElementById('mySong'); s.paused ? (s.play(), document.getElementById('music-btn').innerHTML = "🎶") : (s.pause(), document.getElementById('music-btn').innerHTML = "🎵"); }
     function updateOnlineStatus() { if(!window.userRole) return; database.ref('presence/'+window.userRole).set(true); database.ref('presence/'+window.userRole).onDisconnect().set(false); }
     database.ref('presence/Wahyu').on('value', s => { if(document.getElementById('dot-wahyu')) document.getElementById('dot-wahyu').className = s.val() ? 'online-dot dot-active' : 'online-dot'; });
-    database.ref('presence/RINI').on('value', s => { if(document.getElementById('dot-rini')) document.getElementById('dot-rini').className = s.val() ? 'online-dot dot-active' : 'online-dot'; });
+    database.ref('presence/Rini').on('value', s => { if(document.getElementById('dot-Rini')) document.getElementById('dot-Rini').className = s.val() ? 'online-dot dot-active' : 'online-dot'; });
     
     function sendLoveAction(txt) { 
         database.ref("messages").push().set({ sender: "SISTEM", text: `💖 ${window.userRole}: ${txt}`, type: 'system', timestamp: Date.now() });
@@ -520,7 +520,7 @@
     setInterval(() => {
     const now = new Date();
     const wahyuClock = document.getElementById('clock-wahyu');
-    const RINIClock = document.getElementById('clock-rini');
+    const RiniClock = document.getElementById('clock-Rini');
 
     // Format Jam dengan Detik
     const timeString = now.toLocaleTimeString('id-ID', {
@@ -534,9 +534,9 @@
         wahyuClock.innerText = timeString;
         wahyuClock.classList.add('clock-pulse'); // Tambah kelas animasi
     }
-    if(RINIClock) {
-        RINIClock.innerText = timeString;
-        RINIClock.classList.add('clock-pulse'); // Tambah kelas animasi
+    if(RiniClock) {
+        RiniClock.innerText = timeString;
+        RiniClock.classList.add('clock-pulse'); // Tambah kelas animasi
     }
 
     // --- COUNTDOWN LOGIC ---
