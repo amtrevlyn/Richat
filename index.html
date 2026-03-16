@@ -284,6 +284,9 @@
             setTimeout(() => { ls.style.display = "none"; }, 1000);
             
             updateOnlineStatus(); toggleMusic(); listenMoods(); initTyping(); listenHealth();
+            
+            // PAKSA SCROLL SETELAH LOGIN SELESAI
+            setTimeout(forceScroll, 1200);
         } else { 
             alert("Kode Salah Sayang! Cek Ulang Ya Cintaku💕"); 
             document.getElementById('pass-input').value = "";
@@ -296,7 +299,23 @@
         document.getElementById(id).style.display = 'block';
         el.classList.add('active');
         window.scrollTo({ top: 0, behavior: 'smooth' });
+        
         if(id === 'sec-game') { loadLeaderboard(); resizeCanvas(); }
+        // PAKSA SCROLL SAAT PINDAH KE TAB CHAT
+        if(id === 'sec-chat') setTimeout(forceScroll, 100);
+    }
+
+    // --- FUNGSI KHUSUS AUTO SCROLL ---
+    function forceScroll() {
+        const box = document.getElementById('chat-box');
+        if (box) {
+            box.scrollTo({
+                top: box.scrollHeight,
+                behavior: 'smooth'
+            });
+            // Backup jika smooth scroll tidak jalan
+            box.scrollTop = box.scrollHeight;
+        }
     }
 
     // --- HEALTH TRACKER LOGIC ---
@@ -322,7 +341,6 @@
             if(s.val()) {
                 const date = new Date(s.val());
                 document.getElementById('val-period').innerText = date.toLocaleDateString('id-ID', { day:'numeric', month:'long', year:'numeric' });
-                // Estimasi periode berikutnya (tambah 28 hari)
                 const next = new Date(date);
                 next.setDate(next.getDate() + 28);
                 document.getElementById('period-note').innerText = "Estimasi siklus berikutnya: " + next.toLocaleDateString('id-ID', { day:'numeric', month:'short' });
@@ -386,8 +404,12 @@
         database.ref('typing/' + window.userRole).set(false);
     }
 
+    // LISTENER CHAT DENGAN AUTO SCROLL
     database.ref("messages").on("value", snap => {
-        const box = document.getElementById('chat-box'); box.innerHTML = "";
+        const box = document.getElementById('chat-box'); 
+        if(!box) return;
+        
+        box.innerHTML = "";
         snap.forEach(c => {
             const d = c.val(), div = document.createElement("div");
             div.className = `msg ${d.sender.toLowerCase()} ${d.type||''}`;
@@ -408,7 +430,9 @@
             }
             box.appendChild(div);
         });
-        box.scrollTop = box.scrollHeight;
+        
+        // Skrol ke bawah setiap ada perubahan data pesan
+        setTimeout(forceScroll, 50);
     });
 
     function scrollToMessage(ts) {
@@ -497,8 +521,8 @@
         const now = new Date();
         const wahyuClock = document.getElementById('clock-wahyu');
         const RINIClock = document.getElementById('clock-rini');
-        if(wahyuClock) wahyuClock.innerText = now.toLocaleTimeString('id-ID', {timeZone:'Asia/Makassar', hour:'2-digit', minute:'2-digit'});
-        if(RINIClock) RINIClock.innerText = now.toLocaleTimeString('id-ID', {timeZone:'Asia/Makassar', hour:'2-digit', minute:'2-digit'});
+        if(wahyuClock) wahyuClock.innerText = now.toLocaleTimeString('id-ID', {timeZone:'Asia/Makassar', hour:'2-digit', minute:'2-digit', second: '2-digit});
+        if(RINIClock) RINIClock.innerText = now.toLocaleTimeString('id-ID', {timeZone:'Asia/Makassar', hour:'2-digit', minute:'2-digit', second: '2-digit});
         const diff = new Date("July 31, 2026").getTime() - now.getTime();
         if(diff > 0 && document.getElementById('cd-d')) {
             document.getElementById('cd-d').innerText = Math.floor(diff/86400000);
@@ -508,5 +532,3 @@
         }
     }, 1000);
 </script>
-</body>
-</html>
